@@ -2,7 +2,9 @@
   <div class="h-100 w-100">
     <iframe
       @load="setIframeLoaded()"
-      class="iframe-scale iframe-border-none btn-fade"
+      class="h-100 w-100 iframe-border-none"
+      height="100"
+      width="100"
       frameborder="0"
       allow="fullscreen; geolocation;"
       :class="{
@@ -11,14 +13,13 @@
       :src="url"
       title="Story Map"
     ></iframe>
+
     <div
-      class="flex-column h-100 text-center text-white justify-content-center"
+      class="flex-column h-100 text-center bg-warning text-white justify-content-center"
       :class="{ 'd-none': loaded, 'd-flex': !loaded }"
     >
-      <div class="h1">{{ url }}</div>
-      <div class="mt-4">
-        <font-awesome-icon class="fa-2x" :icon="['fas', 'spinner']" spin />
-      </div>
+      <div class="mt-4 h1">Loading...</div>
+      <div class="">{{ url }}</div>
     </div>
   </div>
 </template>
@@ -29,7 +30,7 @@ export default {
   components: {},
   data() {
     return {
-      loaded: false,
+      loaded: false, // set to true to disable loading screen, false to enable
     };
   },
   props: {
@@ -39,28 +40,13 @@ export default {
     },
   },
   watch: {},
-  computed: {
-  },
+  computed: {},
   methods: {
     setIframeLoaded() {
       console.log("iframe loaded");
-      setInterval(() => {
-        this.loaded = true;
-      }, 0);
+      this.loaded = true;
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-.iframe-scale {
-  width: 100%;
-  height: 100%;
-}
-
-.popup-iframe {
-  padding: 0;
-  height: 60vh;
-  width: 60vw;
-  z-index: 99999 !important;
-}
-</style>
+<style lang="scss" scoped></style>
